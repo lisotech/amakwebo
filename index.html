@@ -18,6 +18,7 @@
       --primary-color: #2c3e50;
       --accent-color: #27ae60;
       --whatsapp-color: #25D366;
+      --call-color: #2980b9;
       --light-bg: #f8f9fa;
       --dark-text: #333;
     }
@@ -310,13 +311,49 @@
       }
     }
 
-    /* Footer */
-    footer {
-      background-color: var(--primary-color);
+    /* Floating Action Buttons Container */
+    .floating-container {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 3000;
+    }
+
+    .floating-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
       color: white;
-      text-align: center;
-      padding: 1.5rem;
-      margin-top: auto;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      font-size: 1.3rem;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .float-wa {
+      background-color: var(--whatsapp-color);
+    }
+
+    .float-wa:hover {
+      background-color: #1ebe57;
+    }
+
+    .float-call {
+      background-color: var(--call-color);
+    }
+
+    .float-call:hover {
+      background-color: #2471a3;
     }
 
     /* Responsive Design Breakpoints */
@@ -333,6 +370,18 @@
 
       .slide-text h2 {
         font-size: 1.2rem;
+      }
+
+      .floating-container {
+        bottom: 15px;
+        right: 15px;
+        gap: 10px;
+      }
+      
+      .floating-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1rem;
       }
     }
   </style>
@@ -371,6 +420,11 @@
     <div class="product-grid" id="productGrid"></div>
   </main>
 
+  <div class="floating-container">
+    <a href="https://wa.me/260974101130" target="_blank" class="floating-btn float-wa" title="Chat on WhatsApp">💬</a>
+    <a href="tel:+260974101130" class="floating-btn float-call" title="Call Us Directly">📞</a>
+  </div>
+
   <div class="modal" id="detailsModal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -380,74 +434,75 @@
     </div>
   </div>
 
-  <footer style="background:#3b7c96; color:white; padding:40px 20px; text-align:center;">
+  <footer style="background:#3b7c96; color:white; padding:15px 10px; text-align:center;">
 
-    <!-- Social Icons -->
-    <div style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap;">
+    <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom: 10px;">
       <a href="https://x.com/lisotechzambia" target="_blank" style="
-            width:50px;
-            height:50px;
+            width:90px;
+            height:38px;
             border:1px solid white;
-            border-radius:50%;
+            border-radius:4px;
             display:flex;
             align-items:center;
             justify-content:center;
             color:white;
-            font-size:10px;
+            font-size:11px;
+            font-weight:600;
             text-decoration:none;">X
       </a>
 
       <a href="https://www.facebook.com/lisotechinnovations" target="_blank" style="
-            width:50px;
-            height:50px;
+            width:90px;
+            height:38px;
             border:1px solid white;
-            border-radius:50%;
+            border-radius:4px;
             display:flex;
             align-items:center;
             justify-content:center;
             color:white;
-            font-size:10px;
-            text-decoration:none;">
-        <i data-lucide="facebook"></i>Facebook
+            font-size:11px;
+            font-weight:600;
+            text-decoration:none;">Facebook
       </a>
 
       <a href="https://www.instagram.com/lisotechinnovations" target="_blank" style="
-            width:50px;
-            height:50px;
+            width:90px;
+            height:38px;
             border:1px solid white;
-            border-radius:50%;
+            border-radius:4px;
             display:flex;
             align-items:center;
             justify-content:center;
             color:white;
-            font-size:10px;
-            text-decoration:none;">
-        <i data-lucide="instagram"></i>Instagram
+            font-size:11px;
+            font-weight:600;
+            text-decoration:none;">Instagram
       </a>
 
       <a href="https://wa.me/message/NEGCGNOZ4BOHP1" target="_blank" style="
-            width:50px;
-            height:50px;
+            width:90px;
+            height:38px;
             border:1px solid white;
-            border-radius:50%;
+            border-radius:4px;
             display:flex;
             align-items:center;
             justify-content:center;
             color:white;
-            font-size:10px;
-            text-decoration:none;">
-        <i data-lucide="X"></i>WhatsApp
+            font-size:11px;
+            font-weight:600;
+            text-decoration:none;">WhatsApp
       </a>
 
     </div>
+    
     <div>
-      <!-- Copyright -->
-      <p style="margin:20px 0; font-size:18px;">
+      <p style="margin:5px 0; font-size:13px; opacity:0.95;">
         © 2026 Lisotech Innovations. All Rights Reserved.
       </p>
     </div>
-    <div>
-      <marquee>Designed @Lisotech Innovations. call or whatsapp +260974101130</marquee>
+    
+    <div style="margin-top: 5px;">
+      <marquee style="font-size:12px; max-width: 500px; margin: 0 auto; display: block;">Designed @Lisotech Innovations. call or whatsapp +260974101130</marquee>
     </div>
   </footer>
 
@@ -463,6 +518,7 @@
     }
     // Auto slide every 5 seconds
     setInterval(() => moveSlide(1), 5000);
+    
     // --- Sample Products Data (10 Items with customizable image attributes) ---
     const products = [{
         id: 1,
@@ -535,6 +591,7 @@
         desc: "Standard and Premium Website."
       }
     ];
+
     // --- Render Products into Grid ---
     const productGrid = document.getElementById('productGrid');
     const phoneNum = "260974101130";
@@ -562,6 +619,7 @@
             `;
       productGrid.appendChild(card);
     });
+
     // --- Action Handlers ---
     function triggerBuy(name, price) {
       alert(`Thank you for choosing Kwatu Amakwebo!\n\nTo complete your purchase for: "${name}" (${price}), please proceed to send us a direct message on WhatsApp or Call via +260974101130.`);
@@ -578,6 +636,7 @@
     function closeModal() {
       document.getElementById('detailsModal').style.display = 'none';
     }
+    
     // Close modal if user clicks outside of the window
     window.onclick = function(event) {
       const modal = document.getElementById('detailsModal');
