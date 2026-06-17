@@ -1,389 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KWATU AMAKWEBO - Online Marketplace</title>
-    <style>
-        /* Base Reset & Variables */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #27ae60;
-            --whatsapp-color: #25D366;
-            --light-bg: #f8f9fa;
-            --dark-text: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KWATU AMAKWEBO - Online Marketplace</title>
+  <style>
+    /* Base Reset & Variables */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        body {
-            background-color: var(--light-bg);
-            color: var(--dark-text);
-            line-height: 1.6;
-        }
+    :root {
+      --primary-color: #2c3e50;
+      --accent-color: #27ae60;
+      --whatsapp-color: #25D366;
+      --light-bg: #f8f9fa;
+      --dark-text: #333;
+    }
 
-        /* Header & Navigation */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .contact-top {
-            font-size: 0.9rem;
-        }
-        .contact-top a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    body {
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
 
-        /* Image Slider Carousel */
-        .slider-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .slider {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .slide {
-            min-width: 100%;
-            position: relative;
-        }
-        .slide img {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-            display: block;
-        }
-        .slide-text {
-            position: absolute;
-            bottom: 20%;
-            left: 5%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-        }
-        /* Slider Buttons */
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            padding: 1rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .slider-btn:hover { background: rgba(0,0,0,0.8); }
-        .prev { left: 10px; }
-        .next { right: 10px; }
+    /* Header & Navigation */
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
 
-        /* Main Marketplace Section */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem 3rem 1rem;
-        }
-        .section-title {
-            text-align: center;
-            margin: 2rem 0;
-            font-size: 2rem;
-            color: var(--primary-color);
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent-color);
-            margin: 8px auto 0 auto;
-            border-radius: 2px;
-        }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-        /* Responsive Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-        .product-image {
-            width: 100%;
-            height: 280px; /* Kept proportional to layout */
-            object-fit: cover;
-            background-color: #eaeaea;
-        }
-        .product-info {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .product-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
-        /* Action Buttons */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-        .btn-row {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .btn {
-            padding: 0.7rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
-        .btn-buy {
-            background-color: var(--accent-color);
-            color: white;
-            flex: 1;
-        }
-        .btn-buy:hover { background-color: #219653; }
-        
-        .btn-details {
-            background-color: #e0e0e0;
-            color: var(--dark-text);
-            flex: 1;
-        }
-        .btn-details:hover { background-color: #d5d5d5; }
+    .contact-top {
+      font-size: 0.9rem;
+    }
 
-        .btn-whatsapp {
-            background-color: var(--whatsapp-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-        }
-        .btn-whatsapp:hover { background-color: #1ebe57; }
+    .contact-top a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-        /* Modal Popups for Details */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 100%;
-            position: relative;
-            animation: fadeIn 0.3s ease;
-        }
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* Image Slider Carousel */
+    .slider-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: auto;
-        }
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
 
-        /* Responsive Design Breakpoints */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
-            }
-            .slide img {
-                height: 300px;
-            }
-            .slide-text h2 {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-text {
+      position: absolute;
+      bottom: 20%;
+      left: 5%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+    }
+
+    /* Slider Buttons */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slider-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    /* Main Marketplace Section */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem 3rem 1rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 2rem;
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--accent-color);
+      margin: 8px auto 0 auto;
+      border-radius: 2px;
+    }
+
+    /* Responsive Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background-color: #eaeaea;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    /* Action Buttons */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .btn-buy {
+      background-color: var(--accent-color);
+      color: white;
+      flex: 1;
+    }
+
+    .btn-buy:hover {
+      background-color: #219653;
+    }
+
+    .btn-details {
+      background-color: #e0e0e0;
+      color: var(--dark-text);
+      flex: 1;
+    }
+
+    .btn-details:hover {
+      background-color: #d5d5d5;
+    }
+
+    .btn-whatsapp {
+      background-color: var(--whatsapp-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #1ebe57;
+    }
+
+    /* Modal Popups for Details */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: auto;
+    }
+
+    /* Responsive Design Breakpoints */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+
+      .slide img {
+        height: 300px;
+      }
+
+      .slide-text h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <header>
-        <div class="header-container">
-            <div class="logo">KWATU AMAKWEBO</div>
-            <div class="contact-top">
-                Inquiries: <a href="tel:+260974101130">Call +260 974 101130</a>
-            </div>
-        </div>
-    </header>
-
-    <div class="slider-container">
-        <div class="slider" id="slider">
-            <div class="slide">
-                <img src="https://picsum.photos/512/512?random=101" alt="Slide 1">
-                <div class="slide-text">
-                    <h2>Welcome to Kwatu Amakwebo</h2>
-                    <p>Your premier local online marketplace.</p>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="https://picsum.photos/512/512?random=102" alt="Slide 2">
-                <div class="slide-text">
-                    <h2>Quality Local Products</h2>
-                    <p>Verified sellers, best market prices.</p>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="https://picsum.photos/512/512?random=103" alt="Slide 3">
-                <div class="slide-text">
-                    <h2>Fast & Direct Inquiry</h2>
-                    <p>Connect instantly via WhatsApp or Call.</p>
-                </div>
-            </div>
-        </div>
-        <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+  <header>
+    <div class="header-container">
+      <div class="logo">KWATU AMAKWEBO</div>
+      <div class="contact-top">
+        Inquiries: <a href="tel:+260974101130">Call +260 974 101130</a>
+      </div>
     </div>
+  </header>
 
-    <main>
-        <h2 class="section-title">Featured Products</h2>
-        
-        <div class="product-grid" id="productGrid">
-            </div>
-    </main>
-
-    <div class="modal" id="detailsModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 id="modalTitle" style="margin-bottom: 1rem; color: var(--primary-color);">Product Title</h3>
-            <p id="modalDescription" style="margin-bottom: 1.5rem;">Product Description goes here...</p>
-            <p id="modalPrice" style="font-size: 1.2rem; font-weight: bold; color: var(--accent-color);"></p>
+  <div class="slider-container">
+    <div class="slider" id="slider">
+      <div class="slide">
+        <img src="3.png" alt="Slide 1">
+        <div class="slide-text">
+          <h2>Welcome to Kwatu Amakwebo</h2>
+          <p>Your premier local online marketplace.</p>
         </div>
+      </div>
+      <div class="slide">
+        <img src="2.jpg" alt="Slide 2">
+        <div class="slide-text">
+          <h2>Quality Local Products</h2>
+          <p>Verified sellers, best market prices.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="3.png" alt="Slide 3">
+        <div class="slide-text">
+          <h2>Fast & Direct Inquiry</h2>
+          <p>Connect instantly via WhatsApp or Call.</p>
+        </div>
+      </div>
     </div>
+    <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
 
-    <footer>
-        <p>&copy; 2026 KWATU AMAKWEBO. All Rights Reserved. | Hotline: +260974101130</p>
-    </footer>
+  <main>
+    <h2 class="section-title">Featured Products</h2>
 
-    <script>
-        // --- Image Slider Logic ---
-        let currentSlide = 0;
-        const slider = document.getElementById('slider');
-        const totalSlides = 3;
+    <div class="product-grid" id="productGrid"></div>
+  </main>
 
-        function moveSlide(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-        
-        // Auto slide every 5 seconds
-        setInterval(() => moveSlide(1), 5000);
+  <div class="modal" id="detailsModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle" style="margin-bottom: 1rem; color: var(--primary-color);">Product Title</h3>
+      <p id="modalDescription" style="margin-bottom: 1.5rem;">Product Description goes here...</p>
+      <p id="modalPrice" style="font-size: 1.2rem; font-weight: bold; color: var(--accent-color);"></p>
+    </div>
+  </div>
+
+  <footer style="background:#3b7c96; color:white; padding:40px 20px; text-align:center;">
+
+  <!-- Footer Links -->
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:25px; margin-bottom:25px;">
+    <a href="#" style="color:white; text-decoration:none;"></a>
+    <a href="#" style="color:white; text-decoration:none;"></a>
+    <a href="#" style="color:white; text-decoration:none;"></a>
+    <a href="#" style="color:white; text-decoration:none;"></a>
+    <a href="#" style="color:white; text-decoration:none;"></a>
+  </div>
+
+  <!-- Social Icons -->
+  <div style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap;">
+
+    <a href="https://x.com/lisotechzambia" target="_blank" style="
+            width:70px;
+            height:70px;
+            border:1px solid white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:30px;
+            text-decoration:none;">X
+    </a>
+
+    <a href="https://www.facebook.com/lisotechinnovations" target="_blank" style="
+            width:70px;
+            height:70px;
+            border:1px solid white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:30px;
+            text-decoration:none;">
+      <i data-lucide="facebook"></i>FB
+    </a>
+
+    <a href="https://www.instagram.com/lisotechinnovations" target="_blank" style="
+            width:70px;
+            height:70px;
+            border:1px solid white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:30px;
+            text-decoration:none;">
+      <i data-lucide="instagram"></i>IG
+    </a>
+
+    <a href="https://wa.me/message/NEGCGNOZ4BOHP1" target="_blank" style="
+            width:70px;
+            height:70px;
+            border:1px solid white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:30px;
+            text-decoration:none;">
+      <i data-lucide="X"></i>WA
+    </a>
+
+  </div>
+     <div>
+    <!-- Copyright -->
+  <p style="margin:20px 0; font-size:18px;">
+    © 2026 Lisotech Innovations. All Rights Reserved.
+  </p>
+    </div>
+     <div>
+       <marquee>Designed @Lisotech Innovations. call or whatsapp +260974101130</marquee>
+    </div>
+</footer>
 
 
-        // --- Sample Products Data (10 Items) ---
-        const products = [
-            { id: 1, name: "Smart Android Phone", price: "K3,500", desc: "High performance smartphone with 128GB Storage, 6GB RAM, and a stunning crisp display perfect for business." },
-            { id: 2, name: "Leather Men's Shoes", price: "K850", desc: "Pure elegant local leather shoes made for supreme comfort and formal dress codes." },
-            { id: 3, name: "Wireless Bluetooth Speaker", price: "K450", desc: "Waterproof outdoor speaker featuring deep bass and up to 10 hours of uninterrupted playback." },
-            { id: 4, name: "Digital Smart Watch", price: "K600", desc: "Tracks your steps, monitoring heart rate, notifications, and features a sleek premium black strap finish." },
-            { id: 5, name: "Ergonomic Office Chair", price: "K2,200", desc: "Perfect for remote setups or office workspace. Complete adjustable lumbar support." },
-            { id: 6, name: "4K Ultra HD Smart TV", price: "K7,800", desc: "Enjoy your streaming applications seamlessly with flawless resolutions and vivid sound systems." },
-            { id: 7, name: "Premium Quality Blender", price: "K550", desc: "Heavy-duty kitchen counter blender, optimized perfectly for fruits, smoothies, and crushing ice smoothly." },
-            { id: 8, name: "Unisex Cotton Hoodie", price: "K350", desc: "100% thick premium combed cotton fabric designed to keep you warm, styling cleanly for casual events." },
-            { id: 9, name: "High-Speed Laptop Intel i5", price: "K9,500", desc: "Lightweight ultrabook optimized heavily for academic students, modern office tasks, and everyday workflow." },
-            { id: 10, name: "Heavy Duty Travel Backpack", price: "K400", desc: "Water-resistant travel spacious backpack built carefully with premium safety laptop compartments." }
-        ];
+  <script>
+    // --- Image Slider Logic ---
+    let currentSlide = 0;
+    const slider = document.getElementById('slider');
+    const totalSlides = 3;
 
-        // --- Render Products into Grid ---
-        const productGrid = document.getElementById('productGrid');
-        const phoneNum = "260974101130";
-
-        products.forEach((prod, index) => {
-            // Using 512x512 sized visual source mockups as requested
-            const imgUrl = `https://picsum.photos/512/512?random=${prod.id}`;
-            const whatsappText = encodeURIComponent(`Hello Kwatu Amakwebo! I am highly interested in purchasing "${prod.name}" for ${prod.price}. Please provide availability details.`);
-            const whatsappUrl = `https://wa.me/${phoneNum}?text=${whatsappText}`;
-
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `
-                <img src="${imgUrl}" alt="${prod.name}" class="product-image" width="512" height="512">
+    function moveSlide(direction) {
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    // Auto slide every 5 seconds
+    setInterval(() => moveSlide(1), 5000);
+    // --- Sample Products Data (10 Items with customizable image attributes) ---
+    const products = [{
+        id: 1,
+        name: "Graphics",
+        price: "K3,500",
+        image: "2.jpg",
+        desc: "High quality graphics design."
+      },
+      {
+        id: 2,
+        name: "Leather Men's Shoes",
+        price: "K850",
+        image: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=512&h=512&fit=crop",
+        desc: "Pure elegant local leather shoes made for supreme comfort and formal dress codes."
+      },
+      {
+        id: 3,
+        name: "Wireless Bluetooth Speaker",
+        price: "K450",
+        image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=512&h=512&fit=crop",
+        desc: "Waterproof outdoor speaker featuring deep bass and up to 10 hours of uninterrupted playback."
+      },
+      {
+        id: 4,
+        name: "Digital Smart Watch",
+        price: "K600",
+        image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=512&h=512&fit=crop",
+        desc: "Tracks your steps, monitoring heart rate, notifications, and features a sleek premium black strap finish."
+      },
+      {
+        id: 5,
+        name: "Ergonomic Office Chair",
+        price: "K2,200",
+        image: "https://images.unsplash.com/photo-1505797149-43b0069ec26b?w=512&h=512&fit=crop",
+        desc: "Perfect for remote setups or office workspace. Complete adjustable lumbar support."
+      },
+      {
+        id: 6,
+        name: "4K Ultra HD Smart TV",
+        price: "K7,800",
+        image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=512&h=512&fit=crop",
+        desc: "Enjoy your streaming applications seamlessly with flawless resolutions and vivid sound systems."
+      },
+      {
+        id: 7,
+        name: "Premium Quality Blender",
+        price: "K550",
+        image: "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?w=512&h=512&fit=crop",
+        desc: "Heavy-duty kitchen counter blender, optimized perfectly for fruits, smoothies, and crushing ice smoothly."
+      },
+      {
+        id: 8,
+        name: "Unisex Cotton Hoodie",
+        price: "K350",
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=512&h=512&fit=crop",
+        desc: "100% thick premium combed cotton fabric designed to keep you warm, styling cleanly for casual events."
+      },
+      {
+        id: 9,
+        name: "High-Speed Laptop Intel i5",
+        price: "K9,500",
+        image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=512&h=512&fit=crop",
+        desc: "Lightweight ultrabook optimized heavily for academic students, modern office tasks, and everyday workflow."
+      },
+      {
+        id: 10,
+        name: "Web Dev",
+        price: "K400",
+        image: "1.jpg",
+        desc: "Standard and Premium Website."
+      }
+    ];
+    // --- Render Products into Grid ---
+    const productGrid = document.getElementById('productGrid');
+    const phoneNum = "260974101130";
+    products.forEach((prod, index) => {
+      const whatsappText = encodeURIComponent(`Hello Kwatu Amakwebo! I am highly interested in purchasing "${prod.name}" for ${prod.price}. Please provide availability details.`);
+      const whatsappUrl = `https://wa.me/${phoneNum}?text=${whatsappText}`;
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+                <img src="${prod.image}" alt="${prod.name}" class="product-image" width="512" height="512">
                 <div class="product-info">
                     <h3 class="product-title">${prod.name}</h3>
                     <div class="product-price">${prod.price}</div>
@@ -399,33 +583,32 @@
                     </div>
                 </div>
             `;
-            productGrid.appendChild(card);
-        });
+      productGrid.appendChild(card);
+    });
+    // --- Action Handlers ---
+    function triggerBuy(name, price) {
+      alert(`Thank you for choosing Kwatu Amakwebo!\n\nTo complete your purchase for: "${name}" (${price}), please proceed to send us a direct message on WhatsApp or Call via +260974101130.`);
+    }
 
-        // --- Action Handlers ---
-        function triggerBuy(name, price) {
-            alert(`Thank you for choosing Kwatu Amakwebo!\n\nTo complete your purchase for: "${name}" (${price}), please proceed to send us a direct message on WhatsApp or Call via +260974101130.`);
-        }
+    function openDetails(index) {
+      const prod = products[index];
+      document.getElementById('modalTitle').innerText = prod.name;
+      document.getElementById('modalDescription').innerText = prod.desc;
+      document.getElementById('modalPrice').innerText = `Price: ${prod.price}`;
+      document.getElementById('detailsModal').style.display = 'flex';
+    }
 
-        function openDetails(index) {
-            const prod = products[index];
-            document.getElementById('modalTitle').innerText = prod.name;
-            document.getElementById('modalDescription').innerText = prod.desc;
-            document.getElementById('modalPrice').innerText = `Price: ${prod.price}`;
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('detailsModal').style.display = 'none';
-        }
-
-        // Close modal if user clicks anywhere outside the card content box
-        window.onclick = function(event) {
-            const modal = document.getElementById('detailsModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    function closeModal() {
+      document.getElementById('detailsModal').style.display = 'none';
+    }
+    // Close modal if user clicks outside of the window
+    window.onclick = function(event) {
+      const modal = document.getElementById('detailsModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 </body>
+
 </html>
